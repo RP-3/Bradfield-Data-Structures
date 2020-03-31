@@ -1,0 +1,22 @@
+{
+  "name": "dataStructures",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "watch": "./node_modules/.bin/tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "typescript": "^3.3.4000"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.26",
+    "@types/node": "^12.7.3",
+    "tslint": "^5.14.0"
+  }
+}
