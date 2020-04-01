@@ -41,7 +41,7 @@ const maxInt = 1_000_000; // use ints up to 1m
     for(let i=0; i<random100k.length; i++) random100k[i] = Math.floor(Math.random()*maxInt);
     const start = Date.now();
     iQuicksort(random100k);
-    console.log(`100k random: ${Date.now() - start}ms`); // ~30ms
+    console.log(`100k random: ${Date.now() - start}ms`); // ~50ms
 })();
 
 // (ii) 100k equal ints
@@ -49,7 +49,7 @@ const maxInt = 1_000_000; // use ints up to 1m
     const equal100k = new Array(100_000).fill(Math.floor(Math.random()*maxInt));
     const start = Date.now();
     iQuicksort(equal100k);
-    console.log(`100k equal: ${Date.now() - start}ms`); // ~7 seconds
+    console.log(`100k equal: ${Date.now() - start}ms`); // ~20ms
 })();
 
 // (iii) 100k sorted ints

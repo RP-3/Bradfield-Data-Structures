@@ -14,9 +14,9 @@ const partition = (l: number, r: number, a: number[]): number => {
 
     // partition by the pivot
     // everything >= pivot on the right, and everything < pivot on the left
-    while(l<=r){ // finish when l === r
+    while(l<=r){ // Stop when l is where r should be
         if(a[r] >= pivot){ // if a[r] is in the correct partition
-            r--; // decrement r
+            r--;
         }
         else if(a[l] >= pivot){ // if a[l] is in the wrong partition
             [a[l], a[r]] = [a[r], a[l]]; // swap elements
@@ -26,12 +26,37 @@ const partition = (l: number, r: number, a: number[]): number => {
         }
     }
 
-    // N.B.: At this point l *is always* > r. Since:
-    // 1. everything AFTER r is >= r
+    // N.B.: At this point l is ALWAYS > r.
+    // Since:
+    // 1. everything AFTER r is >= pivot
     // 2. l is now where r should be
-    // we swap the pivot element with the element at l
-    [a[l], a[rightEnd]] = [a[rightEnd], a[l]]; // move pivot to the correct point, where l met r
-    return l;
+    // l is the correct position to insert the pivot
+
+    // Introduce a second loop to sort elements equal to the pivot into their own bucket
+    [a[l], a[rightEnd]] = [a[rightEnd], a[l]]; // Move l to the correct place
+    const equalFrom = l; // and save a reference to it. This is the first index in the array where we find an element equal to the pivot
+    l++;
+
+    r = rightEnd; // start again from the extreme right end
+
+    // INVARIANT: From this point on, everything between and including equalFrom to l-1 is equal to the pivot
+    // INVARIANT: From this point on, everything AFTER r is strictly > the pivot
+
+    while(l<=r){
+        if(a[r] > pivot){
+            r--;
+        }else{ // a[r] must be == pivot
+            [a[l], a[r]] = [a[r], a[l]]; // swap elements
+            l++; // then safely increment l
+        }
+    }
+    const equalTo = r; // r points to l-1, i.e., the last element that is equal to the pivot
+
+    if(equalFrom === equalTo){ // there are no duplicate pivots
+        return r; // return the one pivot position
+    }else{ // there are duplicate pivots
+        return Math.floor((equalFrom + equalTo) / 2);// return the middle of all duplicated pivots
+    }
 };
 
 /**
