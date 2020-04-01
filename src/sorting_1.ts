@@ -122,15 +122,16 @@ export const quicksort = (array: number[]): void => {
  */
 export const iQuicksort = (array: number[]): void => {
 
-    const stack: number[][] = [[0, array.length-1]];
+    const stack: number[] = [0, array.length-1];
 
     while(stack.length){
-        const [l, r] = stack.pop()!;
+        const r = stack.pop()!;
+        const l = stack.pop()!;
 
         if(l>=r) continue;
 
         const pivotIndex = partition(l, r, array);
-        stack.push([l, pivotIndex-1]); // recurse on the left hand side
-        stack.push([pivotIndex+1, r]); // recurse on the right hand side
+        stack.push(l, pivotIndex-1); // recurse on the left hand side
+        stack.push(pivotIndex+1, r); // recurse on the right hand side
     }
 };
