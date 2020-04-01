@@ -58,5 +58,5 @@ const maxInt = 1_000_000; // use ints up to 1m
     for(let i=0; i<sorted100k.length; i++) sorted100k[i] = i;
     const start = Date.now();
     iQuicksort(sorted100k);
-    console.log(`100k sorted: ${Date.now() - start}ms`); // ~10 seconds
+    console.log(`100k sorted: ${Date.now() - start}ms`); // ~10ms
 })();

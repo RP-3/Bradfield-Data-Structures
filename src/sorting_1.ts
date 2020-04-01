@@ -1,11 +1,50 @@
 // Utils
+
 /**
- * Partitions the given array a from l to r about a randomly-selected pivot.
+ * Returns the index of the median of the three numbers provided.
+ * I.e., 0, 1 or 2
+ */
+const medianFrom = (a: number, b: number, c: number): number => {
+    const nums = [a, b, c];
+    let [lowest, highest] = [nums[0], nums[2]]; // arbitrary
+    for(let i=0; i<nums.length; i++){
+        lowest = Math.min(lowest, nums[i]);
+        highest = Math.max(highest, nums[i]);
+    }
+    if(a !== lowest && a !== highest) return 0;
+    if(b !== lowest && b !== highest) return 1;
+    return 2;
+};
+
+/**
+ * Returns the index of the median of the medians of the first
+ * three elements, the middle three elements and the last three
+ * elements.
+ */
+const medianPivot = (l: number, r: number, a: number[]): number => {
+    const firstMedianIndex = l + medianFrom(a[l], a[l+1], a[l+2]);
+    const thirdMedianIndex = r - 2 + medianFrom(a[r-2], a[r-1], a[r]);
+    const midPoint = Math.floor((l+r)/2);
+    const secondMedianIndex = midPoint-1 + medianFrom(a[midPoint-1], a[midPoint], a[midPoint+1]);
+    const nums = [a[firstMedianIndex], a[secondMedianIndex], a[thirdMedianIndex]];
+
+    let [lowest, highest] = [nums[0], nums[2]]; // arbitrary
+    for(let i=0; i<nums.length; i++){
+        lowest = Math.min(lowest, nums[i]);
+        highest = Math.max(highest, nums[i]);
+    }
+    if(a[firstMedianIndex] !== lowest && a[firstMedianIndex] !== highest) return firstMedianIndex;
+    if(a[secondMedianIndex] !== lowest && a[secondMedianIndex] !== highest) return secondMedianIndex;
+    return thirdMedianIndex;
+};
+
+/**
+ * Partitions the given array a from l to r about a sampled-median pivot.
  * Returns the index of that pivot in the partitioned array.
  */
 const partition = (l: number, r: number, a: number[]): number => {
-    // const pivotIndex = l + Math.floor(Math.random()*(r-l)); // choose a random pivot
-    const pivotIndex = r; // always pick the right corner as the pivot
+    // if there are < 9 elements always pick the right corner as the pivot
+    const pivotIndex = (r-l+1) < 9 ? r : medianPivot(l, r, a); // otherwise use a median of medians
     const pivot = a[pivotIndex];
     const rightEnd = r;
 
