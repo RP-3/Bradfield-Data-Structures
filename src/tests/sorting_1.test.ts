@@ -27,6 +27,16 @@ const withDuplicates2 = [1, 2, 4, 2, 3, 3, 5];
 iQuicksort(withDuplicates2);
 Assert.equal(withDuplicates2, [1, 2, 2, 3, 3, 4, 5]);
 
+// It works with > 9 elements
+const unique3 = [11, 0, 1, 9, 2, 8, 3, 7, 4, 6, 5, 10, 12];
+iQuicksort(unique3);
+Assert.equal(unique3, [1,2,3,4,5,6,7,8,9,10,11,12]);
+
+// It works with > 9 elements with duplicates
+const withDuplicates3 = [11, 0, 1, 9, 2, 8, 3, 7, 3, 6, 3, 10, 12];
+iQuicksort(withDuplicates3);
+Assert.equal(withDuplicates3, [1,2,3,3,3,6,7,8,9,10,11,12]);
+
 /*
 2. How long does your implementation take to sort 100,000
 integers that are (i) randomly generated, (ii) all equal,
