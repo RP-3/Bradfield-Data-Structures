@@ -16,4 +16,9 @@ export class Assert {
 
         return true;
     }
+
+    static isTrue(val: any){
+        if(val === true) return true;
+        throw new Error(`Expected ${val} === true but got something else`);
+    }
 }
