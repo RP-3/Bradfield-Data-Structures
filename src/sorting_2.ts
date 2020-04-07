@@ -14,13 +14,11 @@
 export const insertionSort = (nums: number[]): void => {
 
     for(let i=1; i<nums.length; i++){
-        if(nums[i] >= nums[i-1]) continue;
-        let insertAt = i-1;
-        while(nums[insertAt-1] > nums[i]) insertAt--;
-
-        const tmp = nums[i];
-        for(let j=i-1; j>=insertAt; j--) nums[j+1] = nums[j];
-        nums[insertAt] = tmp;
+        let j = i-1;
+        while(j >= 0 && nums[j] > nums[j+1]){
+            [nums[j], nums[j+1]] = [nums[j+1], nums[j]];
+            j--;
+        }
     }
 };
 
