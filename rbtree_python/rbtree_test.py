@@ -82,8 +82,8 @@ class TestRedBlackTree(unittest.TestCase):
 
             # TODO: Uncomment these once you believe you've implemented a
             # working red-black tree.
-            # assert valid_rbtree_paths(root)
-            # assert valid_rbtree_colors(root)
+            assert valid_rbtree_paths(root)
+            assert valid_rbtree_colors(root)
 
     def test_find(self):
         N = 100
@@ -104,14 +104,14 @@ class TestRedBlackTree(unittest.TestCase):
     # TODO: Uncomment this once you believe you've implemented a working
     # red-black tree.  This should finish in a reasonable amount of time,
     # say, 10 seconds.
-    # def test_scale(self):
-    #     N = 100000
-    #     root = None
-    #     for i in range(N):
-    #         root = insert(root, i)
-    #     assert valid_bst_order(root)
-    #     assert valid_rbtree_paths(root)
-    #     assert valid_rbtree_colors(root)
+    def test_scale(self):
+        N = 100000
+        root = None
+        for i in range(N):
+            root = insert(root, i)
+        assert valid_bst_order(root)
+        assert valid_rbtree_paths(root)
+        assert valid_rbtree_colors(root)
 
 if __name__ == '__main__':
     unittest.main()
