@@ -16,6 +16,15 @@ import { BinarySearchTree } from '../redBlackTrees_1';
     [0, 10, 4.9, 5.1].forEach((v) => Assert.isTrue(!bst.find(v)));
 })();
 
+// it prints in sorted order iteratively
+(() => {
+    const bst = new BinarySearchTree();
+    const vals = [5, 4, 6, 3, 7, 2, 8, 1, 9];
+    vals.forEach((v) => bst.insertIterative(v));
+    vals.forEach((v) => Assert.isTrue(bst.find(v)));
+    Assert.equal([1, 2, 3, 4, 5, 6, 7, 8, 9], bst.sorted());
+})();
+
 // it works with duplicate values
 (() => {
     const bst = new BinarySearchTree();

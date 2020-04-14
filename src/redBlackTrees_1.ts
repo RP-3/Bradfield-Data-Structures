@@ -15,6 +15,33 @@ export class BinarySearchTree {
         else this.root.insert(val);
     }
 
+    public sorted(): number[]{
+        const result: number[] = [];
+        if(!this.root) return result;
+
+        const stack: [TreeNode, Boolean][] = [[this.root, false]];
+
+        while(stack.length){
+            const [current, visited] = stack.pop()!;
+
+            if(!visited){ // if I haven't seen this before
+                if(current.left){ // and there's a left child
+                    stack.push([current, true]); // put me back on the stack
+                    stack.push([current.left, false]); // and visit the left child first
+                }else{ // but if there's no left child
+                    result.push(current.val); // I'm next!
+                    if(current.right) stack.push([current.right, false]); // and then visit my right child
+                }
+            }else{ // I've been visited before! So my left child has already been delt with
+                result.push(current.val); // safely deal with me.
+                if(current.right) stack.push([current.right, false]); // and then visit my right child*
+                // * I know I have to do this because if I'm here, I had a left child, and did not add my right child
+            }
+        }
+
+        return result;
+    }
+
     /**
      * Because recursion fails when the stack gets too deep.
      */
